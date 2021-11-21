@@ -15,6 +15,8 @@
 		CE57480E274A37EB004B3232 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = CE57480D274A37EB004B3232 /* Podfile */; };
 		CE9BF122274A3C640050A164 /* HomeScreenCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */; };
 		CE9BF125274A3D670050A164 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */; };
+		CE9BF12A274A5A850050A164 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF129274A5A850050A164 /* NetworkService.swift */; };
+		CE9BF12E274A62320050A164 /* RandomImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF12D274A62220050A164 /* RandomImages.swift */; };
 		D831E01563A03D0095651FCA /* Pods_Unsplash_Gallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF65AE62632CC5DE227818C2 /* Pods_Unsplash_Gallery.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		CE57480D274A37EB004B3232 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCollectionViewController.swift; sourceTree = "<group>"; };
 		CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewController.swift; sourceTree = "<group>"; };
+		CE9BF129274A5A850050A164 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		CE9BF12D274A62220050A164 /* RandomImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomImages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,8 @@
 		CE5747F5274A3786004B3232 /* Unsplash Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				CE9BF131274A62690050A164 /* Model */,
+				CE9BF132274A62830050A164 /* Services */,
 				CE5747F6274A3786004B3232 /* AppDelegate.swift */,
 				CE5747F8274A3786004B3232 /* SceneDelegate.swift */,
 				CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */,
@@ -95,6 +101,22 @@
 				CE574804274A378A004B3232 /* Info.plist */,
 			);
 			path = "Unsplash Gallery";
+			sourceTree = "<group>";
+		};
+		CE9BF131274A62690050A164 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE9BF12D274A62220050A164 /* RandomImages.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CE9BF132274A62830050A164 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CE9BF129274A5A850050A164 /* NetworkService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,7 +236,9 @@
 				CE5747FB274A3786004B3232 /* DetailsViewController.swift in Sources */,
 				CE9BF125274A3D670050A164 /* FavouritesTableViewController.swift in Sources */,
 				CE5747F7274A3786004B3232 /* AppDelegate.swift in Sources */,
+				CE9BF12E274A62320050A164 /* RandomImages.swift in Sources */,
 				CE5747F9274A3786004B3232 /* SceneDelegate.swift in Sources */,
+				CE9BF12A274A5A850050A164 /* NetworkService.swift in Sources */,
 				CE9BF122274A3C640050A164 /* HomeScreenCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

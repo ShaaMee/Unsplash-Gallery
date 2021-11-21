@@ -11,22 +11,60 @@ private let reuseIdentifier = "galleryCell"
 
 class HomeScreenCollectionViewController: UICollectionViewController {
     
-    private var searchBar = UISearchBar()
-
+    private let randomImagesRequestURL = URL(string: "https://api.unsplash.com/photos/random")
+    
+    private var randomImagesData: [RandomImages] = [] {
+        didSet {
+            var imagesURLs = [String]()
+            for image in randomImagesData {
+                imagesURLs.append(image.urls.thumb)
+            }
+            imagesURLStrings = imagesURLs
+        }
+    }
+    private var imagesURLStrings: [String] = [] {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
+    
+    private let decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }()
+    
+    private let cellsInRowCount: CGFloat = 2.0
+    private let cellsSpacing: CGFloat = 8.0
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         collectionView.backgroundColor = .white
+        collectionView.contentInset = UIEdgeInsets(top: cellsSpacing, left: cellsSpacing, bottom: cellsSpacing, right: cellsSpacing)
+        collectionView.contentInsetAdjustmentBehavior = .automatic
                 
         let searchController = UISearchController(searchResultsController: nil)
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        present(searchController, animated: true)
-        
+        guard let url = randomImagesRequestURL else { return }
+        NetworkService.shared.fetchDataFromURL(url) { [weak self] data in
+            
+            guard let jsonData = try? self?.decoder.decode([RandomImages].self, from: data)
+            else {
+                print("Can't decode data")
+                return }
+            self?.randomImagesData = jsonData
+        }
         
 
     }
@@ -35,14 +73,13 @@ class HomeScreenCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return imagesURLStrings.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
-        // Configure the cell
-    
+        cell.backgroundColor = .black
         return cell
     }
 
@@ -82,6 +119,9 @@ class HomeScreenCollectionViewController: UICollectionViewController {
 extension HomeScreenCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize.zero
+        let collectionViewFrame = collectionView.frame
+        let cellWidth = (collectionViewFrame.width - (cellsInRowCount - 1) * 2 - cellsSpacing * (cellsInRowCount + 1)) / cellsInRowCount
+        
+        return CGSize(width: cellWidth, height: cellWidth)
     }
 }
