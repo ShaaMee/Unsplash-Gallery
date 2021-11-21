@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RandomImages: Codable {
+struct UnsplashImageData: Codable {
     let id: String
     let createdAt, updatedAt, promotedAt: Date
     let width, height: Int

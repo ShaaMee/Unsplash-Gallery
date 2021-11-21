@@ -17,7 +17,7 @@
 		CE9BF122274A3C640050A164 /* HomeScreenCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */; };
 		CE9BF125274A3D670050A164 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */; };
 		CE9BF12A274A5A850050A164 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF129274A5A850050A164 /* NetworkService.swift */; };
-		CE9BF12E274A62320050A164 /* RandomImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF12D274A62220050A164 /* RandomImages.swift */; };
+		CE9BF12E274A62320050A164 /* UnsplashImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF12D274A62220050A164 /* UnsplashImageData.swift */; };
 		D831E01563A03D0095651FCA /* Pods_Unsplash_Gallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF65AE62632CC5DE227818C2 /* Pods_Unsplash_Gallery.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +37,7 @@
 		CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCollectionViewController.swift; sourceTree = "<group>"; };
 		CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewController.swift; sourceTree = "<group>"; };
 		CE9BF129274A5A850050A164 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		CE9BF12D274A62220050A164 /* RandomImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomImages.swift; sourceTree = "<group>"; };
+		CE9BF12D274A62220050A164 /* UnsplashImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashImageData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +109,7 @@
 		CE9BF131274A62690050A164 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CE9BF12D274A62220050A164 /* RandomImages.swift */,
+				CE9BF12D274A62220050A164 /* UnsplashImageData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -239,7 +239,7 @@
 				CE5747FB274A3786004B3232 /* DetailsViewController.swift in Sources */,
 				CE9BF125274A3D670050A164 /* FavouritesTableViewController.swift in Sources */,
 				CE5747F7274A3786004B3232 /* AppDelegate.swift in Sources */,
-				CE9BF12E274A62320050A164 /* RandomImages.swift in Sources */,
+				CE9BF12E274A62320050A164 /* UnsplashImageData.swift in Sources */,
 				CE0BBDC9274A85E10072EB86 /* GalleryItemCollectionViewCell.swift in Sources */,
 				CE5747F9274A3786004B3232 /* SceneDelegate.swift in Sources */,
 				CE9BF12A274A5A850050A164 /* NetworkService.swift in Sources */,

@@ -13,11 +13,11 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     
     private let randomImagesRequestURL = URL(string: "https://api.unsplash.com/photos/random")
     
-    private var randomImagesData: [RandomImages] = [] {
+    private var randomImagesData: [UnsplashImageData] = [] {
         didSet {
             var imagesURLs = [String]()
             for image in randomImagesData {
-                imagesURLs.append(image.urls.thumb)
+                imagesURLs.append(image.urls.regular)
             }
             imagesURLStrings = imagesURLs
         }
@@ -60,7 +60,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         
         NetworkService.shared.fetchDataFromURL(url) { [weak self] data, _ in
             
-            guard let jsonData = try? self?.decoder.decode([RandomImages].self, from: data)
+            guard let jsonData = try? self?.decoder.decode([UnsplashImageData].self, from: data)
             else {
                 print("Can't decode data")
                 return }
@@ -125,8 +125,11 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     */
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? GalleryItemCollectionViewCell else { return }
         let detailsVC = DetailsViewController()
-        detailsVC.view.backgroundColor = .green
+        detailsVC.imageData = randomImagesData[indexPath.row]
+        detailsVC.image = cell.image
         navigationController?.pushViewController(detailsVC, animated: true)
     }
 
