@@ -3,27 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		CE5747F7274A3786004B3232 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5747F6274A3786004B3232 /* AppDelegate.swift */; };
 		CE5747F9274A3786004B3232 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5747F8274A3786004B3232 /* SceneDelegate.swift */; };
-		CE5747FB274A3786004B3232 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5747FA274A3786004B3232 /* ViewController.swift */; };
-		CE5747FE274A3786004B3232 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5747FC274A3786004B3232 /* Main.storyboard */; };
+		CE5747FB274A3786004B3232 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5747FA274A3786004B3232 /* DetailsViewController.swift */; };
 		CE574800274A378A004B3232 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5747FF274A378A004B3232 /* Assets.xcassets */; };
 		CE574803274A378A004B3232 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE574801274A378A004B3232 /* LaunchScreen.storyboard */; };
+		CE57480E274A37EB004B3232 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = CE57480D274A37EB004B3232 /* Podfile */; };
+		CE9BF122274A3C640050A164 /* HomeScreenCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */; };
+		CE9BF125274A3D670050A164 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */; };
+		D831E01563A03D0095651FCA /* Pods_Unsplash_Gallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF65AE62632CC5DE227818C2 /* Pods_Unsplash_Gallery.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		44EB62B781E7369476F0510D /* Pods-Unsplash Gallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unsplash Gallery.release.xcconfig"; path = "Target Support Files/Pods-Unsplash Gallery/Pods-Unsplash Gallery.release.xcconfig"; sourceTree = "<group>"; };
+		ABE98867A377990DBEF49F1B /* Pods-Unsplash Gallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unsplash Gallery.debug.xcconfig"; path = "Target Support Files/Pods-Unsplash Gallery/Pods-Unsplash Gallery.debug.xcconfig"; sourceTree = "<group>"; };
+		AF65AE62632CC5DE227818C2 /* Pods_Unsplash_Gallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Unsplash_Gallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5747F3274A3786004B3232 /* Unsplash Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Unsplash Gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5747F6274A3786004B3232 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE5747F8274A3786004B3232 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE5747FA274A3786004B3232 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CE5747FD274A3786004B3232 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE5747FA274A3786004B3232 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		CE5747FF274A378A004B3232 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE574802274A378A004B3232 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE574804274A378A004B3232 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE57480D274A37EB004B3232 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCollectionViewController.swift; sourceTree = "<group>"; };
+		CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +39,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D831E01563A03D0095651FCA /* Pods_Unsplash_Gallery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00F7FEA3D186469020301761 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF65AE62632CC5DE227818C2 /* Pods_Unsplash_Gallery.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		427C7A54D874FF39E520DEAA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ABE98867A377990DBEF49F1B /* Pods-Unsplash Gallery.debug.xcconfig */,
+				44EB62B781E7369476F0510D /* Pods-Unsplash Gallery.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CE5747EA274A3786004B3232 = {
 			isa = PBXGroup;
 			children = (
 				CE5747F5274A3786004B3232 /* Unsplash Gallery */,
 				CE5747F4274A3786004B3232 /* Products */,
+				427C7A54D874FF39E520DEAA /* Pods */,
+				00F7FEA3D186469020301761 /* Frameworks */,
+				CE57480D274A37EB004B3232 /* Podfile */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +87,9 @@
 			children = (
 				CE5747F6274A3786004B3232 /* AppDelegate.swift */,
 				CE5747F8274A3786004B3232 /* SceneDelegate.swift */,
-				CE5747FA274A3786004B3232 /* ViewController.swift */,
-				CE5747FC274A3786004B3232 /* Main.storyboard */,
+				CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */,
+				CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */,
+				CE5747FA274A3786004B3232 /* DetailsViewController.swift */,
 				CE5747FF274A378A004B3232 /* Assets.xcassets */,
 				CE574801274A378A004B3232 /* LaunchScreen.storyboard */,
 				CE574804274A378A004B3232 /* Info.plist */,
@@ -74,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE574807274A378A004B3232 /* Build configuration list for PBXNativeTarget "Unsplash Gallery" */;
 			buildPhases = (
+				7E45E244D10CD71974F2E77C /* [CP] Check Pods Manifest.lock */,
 				CE5747EF274A3786004B3232 /* Sources */,
 				CE5747F0274A3786004B3232 /* Frameworks */,
 				CE5747F1274A3786004B3232 /* Resources */,
+				6540603E755138BD752B3B25 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,36 +156,72 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE57480E274A37EB004B3232 /* Podfile in Resources */,
 				CE574803274A378A004B3232 /* LaunchScreen.storyboard in Resources */,
 				CE574800274A378A004B3232 /* Assets.xcassets in Resources */,
-				CE5747FE274A3786004B3232 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6540603E755138BD752B3B25 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Unsplash Gallery/Pods-Unsplash Gallery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Unsplash Gallery/Pods-Unsplash Gallery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Unsplash Gallery/Pods-Unsplash Gallery-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E45E244D10CD71974F2E77C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Unsplash Gallery-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CE5747EF274A3786004B3232 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5747FB274A3786004B3232 /* ViewController.swift in Sources */,
+				CE5747FB274A3786004B3232 /* DetailsViewController.swift in Sources */,
+				CE9BF125274A3D670050A164 /* FavouritesTableViewController.swift in Sources */,
 				CE5747F7274A3786004B3232 /* AppDelegate.swift in Sources */,
 				CE5747F9274A3786004B3232 /* SceneDelegate.swift in Sources */,
+				CE9BF122274A3C640050A164 /* HomeScreenCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CE5747FC274A3786004B3232 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE5747FD274A3786004B3232 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CE574801274A378A004B3232 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -283,12 +351,14 @@
 		};
 		CE574808274A378A004B3232 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ABE98867A377990DBEF49F1B /* Pods-Unsplash Gallery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5JFF3U9J3C;
 				INFOPLIST_FILE = "Unsplash Gallery/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -296,18 +366,20 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alexeypavlov.Unsplash-Gallery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		CE574809274A378A004B3232 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44EB62B781E7369476F0510D /* Pods-Unsplash Gallery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5JFF3U9J3C;
 				INFOPLIST_FILE = "Unsplash Gallery/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,7 +387,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alexeypavlov.Unsplash-Gallery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

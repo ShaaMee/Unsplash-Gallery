@@ -10,10 +10,25 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        let homeScreenVC = HomeScreenCollectionViewController(collectionViewLayout: flowLayout)
+        let favouritesVC = FavouritesTableViewController()
+        
+        homeScreenVC.title = "Home Screen"
+        favouritesVC.title = "Favourites"
+        
+        let homeScreenNavigationVC = UINavigationController(rootViewController: homeScreenVC)
+        let favouritesNavigationVC = UINavigationController(rootViewController: favouritesVC)
+        let tabBarController = UITabBarController()
+        tabBarController.setViewControllers([homeScreenNavigationVC, favouritesNavigationVC], animated: false)
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
+        self.window = window
         return true
     }
 
