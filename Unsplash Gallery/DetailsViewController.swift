@@ -17,11 +17,23 @@ class DetailsViewController: UIViewController {
         }
     }
     
+    private var isFavourite: Bool?
+    
     private var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    private var favouriteView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFit
+        view.image = UIImage(systemName: "heart")
+        view.clipsToBounds = true
+        view.tintColor = .red
+        return view
     }()
     
     private var authorNameLabel = UILabel()
@@ -51,6 +63,7 @@ class DetailsViewController: UIViewController {
         }
         
         view.addSubview(photoView)
+        view.addSubview(favouriteView)
         
         authorNameLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         authorNameLabel.textAlignment = .center
@@ -83,7 +96,12 @@ class DetailsViewController: UIViewController {
             
             downloadsCountLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 16),
             downloadsCountLabel.leadingAnchor.constraint(equalTo: photoView.leadingAnchor),
-            downloadsCountLabel.trailingAnchor.constraint(equalTo: photoView.trailingAnchor)
+            downloadsCountLabel.trailingAnchor.constraint(equalTo: photoView.trailingAnchor),
+            
+            favouriteView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            favouriteView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            favouriteView.heightAnchor.constraint(equalToConstant: 50),
+            favouriteView.widthAnchor.constraint(equalTo: favouriteView.heightAnchor)
         ])
     }
     
