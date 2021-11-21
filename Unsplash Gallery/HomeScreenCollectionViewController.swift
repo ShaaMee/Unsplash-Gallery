@@ -10,13 +10,24 @@ import UIKit
 private let reuseIdentifier = "galleryCell"
 
 class HomeScreenCollectionViewController: UICollectionViewController {
+    
+    private var searchBar = UISearchBar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        collectionView.backgroundColor = .blue
+        collectionView.backgroundColor = .white
+                
+        let searchController = UISearchController(searchResultsController: nil)
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        present(searchController, animated: true)
+        
+        
 
     }
 
@@ -66,4 +77,11 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     }
     */
 
+}
+
+extension HomeScreenCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize.zero
+    }
 }

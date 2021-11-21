@@ -21,8 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let homeScreenVC = HomeScreenCollectionViewController(collectionViewLayout: flowLayout)
         let favouritesVC = FavouritesTableViewController()
         
-        homeScreenVC.title = "Home Screen"
+        homeScreenVC.title = "Gallery"
+        homeScreenVC.tabBarItem.image = UIImage(systemName: "photo")
         favouritesVC.title = "Favourites"
+        favouritesVC.tabBarItem.image = UIImage(systemName: "star")
+
         
         let homeScreenNavigationVC = UINavigationController(rootViewController: homeScreenVC)
         let favouritesNavigationVC = UINavigationController(rootViewController: favouritesVC)
