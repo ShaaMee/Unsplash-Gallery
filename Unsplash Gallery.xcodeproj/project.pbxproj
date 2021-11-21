@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0BBDC9274A85E10072EB86 /* GalleryItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BBDC8274A85E10072EB86 /* GalleryItemCollectionViewCell.swift */; };
 		CE5747F7274A3786004B3232 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5747F6274A3786004B3232 /* AppDelegate.swift */; };
 		CE5747F9274A3786004B3232 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5747F8274A3786004B3232 /* SceneDelegate.swift */; };
 		CE5747FB274A3786004B3232 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5747FA274A3786004B3232 /* DetailsViewController.swift */; };
@@ -24,6 +25,7 @@
 		44EB62B781E7369476F0510D /* Pods-Unsplash Gallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unsplash Gallery.release.xcconfig"; path = "Target Support Files/Pods-Unsplash Gallery/Pods-Unsplash Gallery.release.xcconfig"; sourceTree = "<group>"; };
 		ABE98867A377990DBEF49F1B /* Pods-Unsplash Gallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unsplash Gallery.debug.xcconfig"; path = "Target Support Files/Pods-Unsplash Gallery/Pods-Unsplash Gallery.debug.xcconfig"; sourceTree = "<group>"; };
 		AF65AE62632CC5DE227818C2 /* Pods_Unsplash_Gallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Unsplash_Gallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE0BBDC8274A85E10072EB86 /* GalleryItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE5747F3274A3786004B3232 /* Unsplash Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Unsplash Gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5747F6274A3786004B3232 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE5747F8274A3786004B3232 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				CE5747F6274A3786004B3232 /* AppDelegate.swift */,
 				CE5747F8274A3786004B3232 /* SceneDelegate.swift */,
 				CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */,
+				CE0BBDC8274A85E10072EB86 /* GalleryItemCollectionViewCell.swift */,
 				CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */,
 				CE5747FA274A3786004B3232 /* DetailsViewController.swift */,
 				CE5747FF274A378A004B3232 /* Assets.xcassets */,
@@ -237,6 +240,7 @@
 				CE9BF125274A3D670050A164 /* FavouritesTableViewController.swift in Sources */,
 				CE5747F7274A3786004B3232 /* AppDelegate.swift in Sources */,
 				CE9BF12E274A62320050A164 /* RandomImages.swift in Sources */,
+				CE0BBDC9274A85E10072EB86 /* GalleryItemCollectionViewCell.swift in Sources */,
 				CE5747F9274A3786004B3232 /* SceneDelegate.swift in Sources */,
 				CE9BF12A274A5A850050A164 /* NetworkService.swift in Sources */,
 				CE9BF122274A3C640050A164 /* HomeScreenCollectionViewController.swift in Sources */,

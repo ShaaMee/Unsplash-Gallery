@@ -43,7 +43,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(GalleryItemCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -57,7 +57,8 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         guard let url = randomImagesRequestURL else { return }
-        NetworkService.shared.fetchDataFromURL(url) { [weak self] data in
+        
+        NetworkService.shared.fetchDataFromURL(url) { [weak self] data, _ in
             
             guard let jsonData = try? self?.decoder.decode([RandomImages].self, from: data)
             else {
@@ -65,21 +66,30 @@ class HomeScreenCollectionViewController: UICollectionViewController {
                 return }
             self?.randomImagesData = jsonData
         }
-        
-
     }
 
     // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return imagesURLStrings.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        cell.backgroundColor = .black
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! GalleryItemCollectionViewCell
+        
+        cell.backgroundColor = .systemGray5
+        cell.activityIndicator.startAnimating()
+        guard let url = URL(string: imagesURLStrings[indexPath.row]) else { return cell }
+        
+        NetworkService.shared.fetchDataFromURL(url) { imageData, dataTask in
+            guard let image = UIImage(data: imageData) else { return }
+            DispatchQueue.main.async {
+                cell.image = image
+                cell.activityIndicator.stopAnimating()
+            }
+            guard let dataTask =  dataTask else { return }
+            cell.dataTask = dataTask
+        }
         return cell
     }
 
@@ -113,6 +123,12 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     
     }
     */
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailsVC = DetailsViewController()
+        detailsVC.view.backgroundColor = .green
+        navigationController?.pushViewController(detailsVC, animated: true)
+    }
 
 }
 
