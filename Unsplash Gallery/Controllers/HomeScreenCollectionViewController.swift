@@ -58,7 +58,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         
         guard let url = randomImagesRequestURL else { return }
         
-        NetworkService.shared.fetchDataFromURL(url) { [weak self] data, _ in
+        NetworkService.shared.fetchDataFromURL(url) { [weak self] data in
             
             guard let jsonData = try? self?.decoder.decode([UnsplashImageData].self, from: data)
             else {
@@ -68,7 +68,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         }
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK:- UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imagesURLStrings.count
@@ -78,17 +78,22 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! GalleryItemCollectionViewCell
         
         cell.backgroundColor = .systemGray5
+        cell.tag = indexPath.row
         cell.activityIndicator.startAnimating()
+        cell.isUserInteractionEnabled = false
         guard let url = URL(string: imagesURLStrings[indexPath.row]) else { return cell }
         
-        NetworkService.shared.fetchDataFromURL(url) { imageData, dataTask in
+        NetworkService.shared.fetchDataFromURL(url) { imageData in
+            
             guard let image = UIImage(data: imageData) else { return }
-            DispatchQueue.main.async {
-                cell.image = image
-                cell.activityIndicator.stopAnimating()
+            
+            if cell.tag == indexPath.row {
+                DispatchQueue.main.async {
+                    cell.image = image
+                    cell.activityIndicator.stopAnimating()
+                    cell.isUserInteractionEnabled = true
+                }
             }
-            guard let dataTask =  dataTask else { return }
-            cell.dataTask = dataTask
         }
         return cell
     }

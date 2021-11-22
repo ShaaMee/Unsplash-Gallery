@@ -25,24 +25,23 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
     
     var image: UIImage? {
         didSet {
-            guard let image = image else { return }
+            guard let image = image else {
+                imageView.image = nil
+                return
+            }
             imageView = UIImageView(image: image)
         }
     }
     
-    var dataTask: URLSessionTask?
-    
+   
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = 16
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(imageView)
-        contentView.addSubview(activityIndicator)
-        clipsToBounds = true
-        
-        
+        setupViews()
+        setupConstraints()
+    }
+    
+    fileprivate func setupConstraints() {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
@@ -53,10 +52,17 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    fileprivate func setupViews() {
+        layer.cornerRadius = 16
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(imageView)
+        contentView.addSubview(activityIndicator)
+        clipsToBounds = true
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
-        dataTask?.cancel()
     }
-    
 }
