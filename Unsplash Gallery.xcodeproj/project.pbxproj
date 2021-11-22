@@ -15,6 +15,7 @@
 		CE574800274A378A004B3232 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5747FF274A378A004B3232 /* Assets.xcassets */; };
 		CE574803274A378A004B3232 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE574801274A378A004B3232 /* LaunchScreen.storyboard */; };
 		CE57480E274A37EB004B3232 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = CE57480D274A37EB004B3232 /* Podfile */; };
+		CE7AF0D0274C2F5400DD1FBA /* FavouritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7AF0CF274C2F5400DD1FBA /* FavouritesTableViewCell.swift */; };
 		CE9BF122274A3C640050A164 /* HomeScreenCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */; };
 		CE9BF125274A3D670050A164 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */; };
 		CE9BF12A274A5A850050A164 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF129274A5A850050A164 /* NetworkService.swift */; };
@@ -36,6 +37,7 @@
 		CE574802274A378A004B3232 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE574804274A378A004B3232 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE57480D274A37EB004B3232 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		CE7AF0CF274C2F5400DD1FBA /* FavouritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewCell.swift; sourceTree = "<group>"; };
 		CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCollectionViewController.swift; sourceTree = "<group>"; };
 		CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewController.swift; sourceTree = "<group>"; };
 		CE9BF129274A5A850050A164 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				CE0BBDC8274A85E10072EB86 /* GalleryItemCollectionViewCell.swift */,
+				CE7AF0CF274C2F5400DD1FBA /* FavouritesTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				CE5747F7274A3786004B3232 /* AppDelegate.swift in Sources */,
 				CE9BF12E274A62320050A164 /* UnsplashImageData.swift in Sources */,
 				CE0BBDC9274A85E10072EB86 /* GalleryItemCollectionViewCell.swift in Sources */,
+				CE7AF0D0274C2F5400DD1FBA /* FavouritesTableViewCell.swift in Sources */,
 				CE226055274BE83300DE3E90 /* Persistance.swift in Sources */,
 				CE5747F9274A3786004B3232 /* SceneDelegate.swift in Sources */,
 				CE9BF12A274A5A850050A164 /* NetworkService.swift in Sources */,

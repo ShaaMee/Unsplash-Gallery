@@ -17,7 +17,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         didSet {
             var imagesURLs = [String]()
             for image in randomImagesData {
-                imagesURLs.append(image.urls.regular)
+                imagesURLs.append(image.urls.small)
             }
             imagesURLStrings = imagesURLs
         }

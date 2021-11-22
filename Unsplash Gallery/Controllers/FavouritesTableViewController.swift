@@ -8,10 +8,31 @@
 import UIKit
 
 class FavouritesTableViewController: UITableViewController {
+    
+    private let reuseIdentifier = "favouritesCell"
+    
+    private var favouritesDictionary: [String:UnsplashImageData] {
+        Persistance.shared.getAllObjects()
+    }
+    
+    private var favouritesArray: [UnsplashImageData] {
+        var array = [UnsplashImageData]()
+        favouritesDictionary.forEach { (_, value) in
+            array.append(value)
+        }
+        return array.sorted { $0.user.name < $1.user.name }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.register(FavouritesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+                
         view.backgroundColor = .white
 
         // Uncomment the following line to preserve selection between presentations
@@ -25,18 +46,35 @@ class FavouritesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return favouritesDictionary.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! FavouritesTableViewCell
+        
+        cell.textLabel?.text = favouritesArray[indexPath.row].user.name
+        
+        guard let url = URL(string: favouritesArray[indexPath.row].urls.small) else { return cell }
+        
+        cell.tag = indexPath.row
+        
+        NetworkService.shared.fetchDataFromURL(url) { imageData in
+            
+            guard let image = UIImage(data: imageData) else { return }
+            
+            if cell.tag == indexPath.row {
+                DispatchQueue.main.async {
+                    cell.imageView?.image = image
+                    cell.layoutSubviews()
+                    //cell.activityIndicator.stopAnimating()
+                    //cell.isUserInteractionEnabled = true
+                }
+            }
+        }
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -82,5 +120,13 @@ class FavouritesTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        let detailsVC = DetailsViewController()
+        detailsVC.imageData = favouritesArray[indexPath.row]
+        detailsVC.image = cell.imageView?.image
+        navigationController?.pushViewController(detailsVC, animated: true)    }
 
 }

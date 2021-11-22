@@ -8,11 +8,11 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
-    
+        
     var imageData: UnsplashImageData?
     
     private var persistanceKey: String? {
-        imageData?.urls.regular
+        imageData?.urls.small
     }
     
     var image: UIImage? {
@@ -67,6 +67,7 @@ class DetailsViewController: UIViewController {
         
         setupViews(imageData)
         setupConstraints()
+        
         guard let key = persistanceKey else { return }
         isFavourite = Persistance.shared.storesObjectForKey(key, ofType: UnsplashImageData.self)
         
