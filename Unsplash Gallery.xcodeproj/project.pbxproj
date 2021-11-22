@@ -69,6 +69,35 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CE0BBDCD274B6F570072EB86 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				CE5747FF274A378A004B3232 /* Assets.xcassets */,
+				CE574801274A378A004B3232 /* LaunchScreen.storyboard */,
+				CE5747F6274A3786004B3232 /* AppDelegate.swift */,
+				CE5747F8274A3786004B3232 /* SceneDelegate.swift */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		CE0BBDCE274B6F9B0072EB86 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */,
+				CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */,
+				CE5747FA274A3786004B3232 /* DetailsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CE0BBDCF274B6FC30072EB86 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE0BBDC8274A85E10072EB86 /* GalleryItemCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CE5747EA274A3786004B3232 = {
 			isa = PBXGroup;
 			children = (
@@ -92,15 +121,10 @@
 			isa = PBXGroup;
 			children = (
 				CE9BF131274A62690050A164 /* Model */,
+				CE0BBDCF274B6FC30072EB86 /* Views */,
+				CE0BBDCE274B6F9B0072EB86 /* Controllers */,
 				CE9BF132274A62830050A164 /* Services */,
-				CE5747F6274A3786004B3232 /* AppDelegate.swift */,
-				CE5747F8274A3786004B3232 /* SceneDelegate.swift */,
-				CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */,
-				CE0BBDC8274A85E10072EB86 /* GalleryItemCollectionViewCell.swift */,
-				CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */,
-				CE5747FA274A3786004B3232 /* DetailsViewController.swift */,
-				CE5747FF274A378A004B3232 /* Assets.xcassets */,
-				CE574801274A378A004B3232 /* LaunchScreen.storyboard */,
+				CE0BBDCD274B6F570072EB86 /* SupportingFiles */,
 				CE574804274A378A004B3232 /* Info.plist */,
 			);
 			path = "Unsplash Gallery";

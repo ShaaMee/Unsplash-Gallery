@@ -17,13 +17,24 @@ class DetailsViewController: UIViewController {
         }
     }
     
-    private var isFavourite: Bool?
+    private var isFavourite: Bool = false {
+        didSet{
+            favouriteView.image = isFavourite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        }
+    }
     
     private var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    private var favouriteButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(toggleFavourite), for: .touchUpInside)
+        return button
     }()
     
     private var favouriteView: UIImageView = {
@@ -41,6 +52,9 @@ class DetailsViewController: UIViewController {
     private var locationLabel = UILabel()
     private var downloadsCountLabel = UILabel()
     
+    
+    // MARK:- ViewDidLoad()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +64,8 @@ class DetailsViewController: UIViewController {
         setupConstraints()
     }
     
-    
+    // MARK:- Setting up views
+
     fileprivate func setupViews(_ imageData: UnsplashImageData) {
         
         view.backgroundColor = .white
@@ -63,7 +78,8 @@ class DetailsViewController: UIViewController {
         }
         
         view.addSubview(photoView)
-        view.addSubview(favouriteView)
+        view.addSubview(favouriteButton)
+        favouriteButton.addSubview(favouriteView)
         
         authorNameLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         authorNameLabel.textAlignment = .center
@@ -74,13 +90,15 @@ class DetailsViewController: UIViewController {
         downloadsCountLabel.text = "Total downdloads: \(imageData.downloads.description)"
     }
     
-    
+    // MARK:- Setting up constraints
+
     fileprivate func setupConstraints() {
+        
         NSLayoutConstraint.activate([
             photoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             photoView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             photoView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
-            photoView.heightAnchor.constraint(equalTo: photoView.widthAnchor),
+            photoView.heightAnchor.constraint(lessThanOrEqualTo: photoView.widthAnchor),
             
             authorNameLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 16),
             authorNameLabel.leadingAnchor.constraint(equalTo: photoView.leadingAnchor),
@@ -98,11 +116,22 @@ class DetailsViewController: UIViewController {
             downloadsCountLabel.leadingAnchor.constraint(equalTo: photoView.leadingAnchor),
             downloadsCountLabel.trailingAnchor.constraint(equalTo: photoView.trailingAnchor),
             
-            favouriteView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            favouriteView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            favouriteView.heightAnchor.constraint(equalToConstant: 50),
-            favouriteView.widthAnchor.constraint(equalTo: favouriteView.heightAnchor)
+            favouriteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
+            favouriteButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            favouriteButton.heightAnchor.constraint(equalToConstant: 40),
+            favouriteButton.widthAnchor.constraint(equalTo: favouriteButton.heightAnchor),
+            
+            favouriteView.centerXAnchor.constraint(equalTo: favouriteButton.centerXAnchor),
+            favouriteView.centerYAnchor.constraint(equalTo: favouriteButton.centerYAnchor),
+            favouriteView.widthAnchor.constraint(equalTo: favouriteButton.widthAnchor),
+            favouriteView.heightAnchor.constraint(equalTo: favouriteButton.heightAnchor)
         ])
+    }
+    
+    // MARK:- Favourite button action
+
+    @objc private func toggleFavourite(){
+        isFavourite.toggle()
     }
     
 }
