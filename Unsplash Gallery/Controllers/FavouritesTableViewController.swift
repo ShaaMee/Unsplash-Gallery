@@ -20,7 +20,7 @@ class FavouritesTableViewController: UITableViewController {
         favouritesDictionary.forEach { (_, value) in
             array.append(value)
         }
-        return array.sorted { $0.user.name < $1.user.name }
+        return array.sorted { $0.user.name.lowercased() < $1.user.name.lowercased() }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +53,7 @@ class FavouritesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! FavouritesTableViewCell
         
-        cell.textLabel?.text = favouritesArray[indexPath.row].user.name
+        cell.artistNameLabel.text = favouritesArray[indexPath.row].user.name
         
         guard let url = URL(string: favouritesArray[indexPath.row].urls.small) else { return cell }
         
@@ -65,10 +65,8 @@ class FavouritesTableViewController: UITableViewController {
             
             if cell.tag == indexPath.row {
                 DispatchQueue.main.async {
-                    cell.imageView?.image = image
+                    cell.picture = image
                     cell.layoutSubviews()
-                    //cell.activityIndicator.stopAnimating()
-                    //cell.isUserInteractionEnabled = true
                 }
             }
         }
@@ -121,12 +119,16 @@ class FavouritesTableViewController: UITableViewController {
     }
     */
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        guard let cell = tableView.cellForRow(at: indexPath) as? FavouritesTableViewCell else { return }
         let detailsVC = DetailsViewController()
         detailsVC.imageData = favouritesArray[indexPath.row]
-        detailsVC.image = cell.imageView?.image
+        detailsVC.image = cell.picture
         navigationController?.pushViewController(detailsVC, animated: true)    }
 
 }

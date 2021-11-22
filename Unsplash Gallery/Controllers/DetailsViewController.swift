@@ -67,10 +67,13 @@ class DetailsViewController: UIViewController {
         
         setupViews(imageData)
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         guard let key = persistanceKey else { return }
         isFavourite = Persistance.shared.storesObjectForKey(key, ofType: UnsplashImageData.self)
-        
     }
     
     // MARK:- Setting up views

@@ -41,6 +41,15 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         setupConstraints()
     }
     
+    fileprivate func setupViews() {
+        layer.cornerRadius = 16
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(imageView)
+        contentView.addSubview(activityIndicator)
+        clipsToBounds = true
+    }
+    
     fileprivate func setupConstraints() {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -50,15 +59,6 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
             activityIndicator.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: imageView.centerXAnchor)
         ])
-    }
-    
-    fileprivate func setupViews() {
-        layer.cornerRadius = 16
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(imageView)
-        contentView.addSubview(activityIndicator)
-        clipsToBounds = true
     }
     
     override func prepareForReuse() {
