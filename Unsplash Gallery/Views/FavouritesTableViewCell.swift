@@ -20,6 +20,8 @@ class FavouritesTableViewCell: UITableViewCell {
     
     var artistNameLabel = UILabel()
     
+    // MARK:- layoutSubviews()
+
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -27,12 +29,9 @@ class FavouritesTableViewCell: UITableViewCell {
         setupConstraints()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        pictureView.image = nil
-    }
-    
-    fileprivate func setupViews() {
+    // MARK:- Setting up views
+
+    private func setupViews() {
         pictureView.backgroundColor = .systemGray5
         pictureView.layer.cornerRadius = 8
         pictureView.contentMode = .scaleAspectFill
@@ -44,7 +43,9 @@ class FavouritesTableViewCell: UITableViewCell {
         contentView.addSubview(artistNameLabel)
     }
     
-    fileprivate func setupConstraints() {
+    // MARK:- Setting up constraints
+
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             pictureView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             pictureView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -57,5 +58,8 @@ class FavouritesTableViewCell: UITableViewCell {
         ])
     }
     
-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pictureView.image = nil
+    }
 }

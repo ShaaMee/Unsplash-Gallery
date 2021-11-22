@@ -58,16 +58,17 @@ class DetailsViewController: UIViewController {
     private var downloadsCountLabel = UILabel()
     
     
-    // MARK:- ViewDidLoad()
-    
+    // MARK:- viewDidLoad()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         guard let imageData = imageData else { return }
-        
         setupViews(imageData)
         setupConstraints()
     }
+    
+    // MARK:- viewWillAppear() (Changing state of heart icon)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -78,7 +79,7 @@ class DetailsViewController: UIViewController {
     
     // MARK:- Setting up views
 
-    fileprivate func setupViews(_ imageData: UnsplashImageData) {
+    private func setupViews(_ imageData: UnsplashImageData) {
         
         view.backgroundColor = .white
         
@@ -104,7 +105,7 @@ class DetailsViewController: UIViewController {
     
     // MARK:- Setting up constraints
 
-    fileprivate func setupConstraints() {
+    private func setupConstraints() {
         
         NSLayoutConstraint.activate([
             photoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
@@ -149,10 +150,8 @@ class DetailsViewController: UIViewController {
               let key = persistanceKey else { return }
         
         switch isFavourite {
-        case true:
-            Persistance.shared.addObject(storedData, withKey: key)
-        default:
-            Persistance.shared.removeObjectWithKey(key, ofType: UnsplashImageData.self)
+        case true:  Persistance.shared.addObject(storedData, withKey: key)
+        default:    Persistance.shared.removeObjectWithKey(key, ofType: UnsplashImageData.self)
         }
     }
 }

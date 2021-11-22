@@ -12,6 +12,8 @@ private let reuseIdentifier = "galleryCell"
 class HomeScreenCollectionViewController: UICollectionViewController {
     
     private let randomImagesRequestURL = URL(string: "https://api.unsplash.com/photos/random")
+    private let cellsInRowCount: CGFloat = 2.0
+    private let cellsSpacing: CGFloat = 8.0
     
     private var randomImagesData: [UnsplashImageData] = [] {
         didSet {
@@ -37,35 +39,37 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         return decoder
     }()
     
-    private let cellsInRowCount: CGFloat = 2.0
-    private let cellsSpacing: CGFloat = 8.0
-        
+    // MARK:- viewDidLoad()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupViews()
 
         self.collectionView!.register(GalleryItemCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        collectionView.backgroundColor = .white
-        collectionView.contentInset = UIEdgeInsets(top: cellsSpacing, left: cellsSpacing, bottom: cellsSpacing, right: cellsSpacing)
-        collectionView.contentInsetAdjustmentBehavior = .automatic
-                
-        let searchController = UISearchController(searchResultsController: nil)
-        
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
         
         guard let url = randomImagesRequestURL else { return }
         
         NetworkService.shared.fetchDataFromURL(url) { [weak self] data in
             
             guard let jsonData = try? self?.decoder.decode([UnsplashImageData].self, from: data)
-            else {
-                print("Can't decode data")
-                return }
+            else { return }
             self?.randomImagesData = jsonData
         }
+    }
+    
+    // MARK:- Setting up views
+    
+    private func setupViews() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .white
+        collectionView.contentInset = UIEdgeInsets(top: cellsSpacing, left: cellsSpacing, bottom: cellsSpacing, right: cellsSpacing)
+        collectionView.contentInsetAdjustmentBehavior = .automatic
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     // MARK:- UICollectionViewDataSource
@@ -77,7 +81,6 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! GalleryItemCollectionViewCell
         
-        cell.backgroundColor = .systemGray5
         cell.tag = indexPath.row
         cell.activityIndicator.startAnimating()
         cell.isUserInteractionEnabled = false
@@ -98,37 +101,8 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
+    // MARK:- UICollectionViewDelegate
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? GalleryItemCollectionViewCell else { return }
@@ -139,6 +113,8 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     }
 
 }
+
+// MARK:- UICollectionViewDelegateFlowLayout
 
 extension HomeScreenCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

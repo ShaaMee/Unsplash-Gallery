@@ -12,10 +12,13 @@ class NetworkService {
     
     static let shared = NetworkService()
     
+    private let clientID = "Client-ID V3zkhd96J-spd6EtpmlyaMwM7ONhGPsDYZqgwWTAkkM"
+    private let imagesCount = 30
+    
     func fetchDataFromURL(_ url: URL, completion: @escaping ((Data) -> ())) {
         AF.request(url,
-                   parameters: ["count":30],
-                   headers: [HTTPHeader(name: "Authorization", value: "Client-ID V3zkhd96J-spd6EtpmlyaMwM7ONhGPsDYZqgwWTAkkM")])
+                   parameters: ["count":imagesCount],
+                   headers: [HTTPHeader(name: "Authorization", value: clientID)])
             .validate()
             .responseData(completionHandler: { response in
                 guard let data = response.data else {

@@ -8,27 +8,21 @@
 import Foundation
 
 struct UnsplashImageData: Codable {
-    let id: String
-    let createdAt, updatedAt, promotedAt: Date
-    let width, height: Int
+    let createdAt: Date
     let urls: Urls
-    let likes: Int
-    let likedByUser: Bool
     let user: User
     let location: Location
     let downloads: Int
 }
 
-
 // MARK: - Location
 struct Location: Codable {
-    let title, name, city, country: String?
+    let title: String?
 }
 
 // MARK: - Urls
 struct Urls: Codable {
-    let raw, full, regular, small: String
-    let thumb: String
+    let small: String
 }
 
 // MARK: - User

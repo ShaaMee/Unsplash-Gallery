@@ -8,8 +8,11 @@
 import Foundation
 
 class Persistance {
+    
     static let shared = Persistance()
+    
     private let persistanceKey = "FavouritesList"
+    
     private let storage = UserDefaults.standard
     
     func addObject<T:Codable>(_ object: T, withKey objectKey: String) {
@@ -33,6 +36,7 @@ class Persistance {
         guard let data = storage.value(forKey: persistanceKey) as? Data,
               let objects = try? PropertyListDecoder().decode([String:T].self, from: data)
         else { return [:] }
+        
         return objects
     }
 }

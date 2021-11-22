@@ -18,9 +18,7 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
     }()
     
     private var imageView = UIImageView(frame: .zero) {
-        didSet {
-            layoutSubviews()
-        }
+        didSet { layoutSubviews() }
     }
     
     var image: UIImage? {
@@ -33,7 +31,8 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         }
     }
     
-   
+    // MARK:- layoutSubviews()
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -41,8 +40,11 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         setupConstraints()
     }
     
-    fileprivate func setupViews() {
+    // MARK:- Setting up views
+
+    private func setupViews() {
         layer.cornerRadius = 16
+        backgroundColor = .systemGray5
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
@@ -50,7 +52,9 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         clipsToBounds = true
     }
     
-    fileprivate func setupConstraints() {
+    // MARK:- Setting up constraints
+
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
