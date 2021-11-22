@@ -10,6 +10,11 @@ import UIKit
 class DetailsViewController: UIViewController {
     
     var imageData: UnsplashImageData?
+    
+    private var persistanceKey: String? {
+        imageData?.urls.regular
+    }
+    
     var image: UIImage? {
         didSet{
             guard let image = image else { return }
@@ -62,6 +67,9 @@ class DetailsViewController: UIViewController {
         
         setupViews(imageData)
         setupConstraints()
+        guard let key = persistanceKey else { return }
+        isFavourite = Persistance.shared.storesObjectForKey(key, ofType: UnsplashImageData.self)
+        
     }
     
     // MARK:- Setting up views
@@ -132,7 +140,16 @@ class DetailsViewController: UIViewController {
 
     @objc private func toggleFavourite(){
         isFavourite.toggle()
+        
+        guard let storedData = imageData,
+              let key = persistanceKey else { return }
+        
+        switch isFavourite {
+        case true:
+            Persistance.shared.addObject(storedData, withKey: key)
+        default:
+            Persistance.shared.removeObjectWithKey(key, ofType: UnsplashImageData.self)
+        }
     }
-    
 }
 
