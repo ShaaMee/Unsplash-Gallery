@@ -12,13 +12,14 @@ private let reuseIdentifier = "galleryCell"
 class HomeScreenCollectionViewController: UICollectionViewController {
     
     private let randomImagesRequestURL = URL(string: "https://api.unsplash.com/photos/random")
+    private let searchImagesRequestURL = URL(string: "https://api.unsplash.com/search/photos")
     private let cellsInRowCount: CGFloat = 2.0
     private let cellsSpacing: CGFloat = 8.0
     
-    private var randomImagesData: [UnsplashImageData] = [] {
+    private var imagesData: [UnsplashImageData] = [] {
         didSet {
             var imagesURLs = [String]()
-            for image in randomImagesData {
+            for image in imagesData {
                 imagesURLs.append(image.urls.small)
             }
             imagesURLStrings = imagesURLs
@@ -48,14 +49,18 @@ class HomeScreenCollectionViewController: UICollectionViewController {
 
         self.collectionView!.register(GalleryItemCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        guard let url = randomImagesRequestURL else { return }
+        fetchRandomPhotos()
         
-        NetworkService.shared.fetchDataFromURL(url) { [weak self] data in
-            
-            guard let jsonData = try? self?.decoder.decode([UnsplashImageData].self, from: data)
-            else { return }
-            self?.randomImagesData = jsonData
-        }
+//        guard let url = randomImagesRequestURL else { return }
+//
+//        NetworkService.shared.fetchDataFromURL(url) { [weak self] data in
+//
+//            guard let jsonData = try? self?.decoder.decode([UnsplashImageData].self, from: data)
+//            else {
+//                print("Can't decode for first load! Check your load limit")
+//                return }
+//            self?.imagesData = jsonData
+//        }
     }
     
     // MARK:- Setting up views
@@ -66,10 +71,13 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         collectionView.contentInset = UIEdgeInsets(top: cellsSpacing, left: cellsSpacing, bottom: cellsSpacing, right: cellsSpacing)
         collectionView.contentInsetAdjustmentBehavior = .automatic
         
+        // Creating and seting up a UISearchController
         let searchController = UISearchController(searchResultsController: nil)
-        
-        navigationItem.searchController = searchController
+        searchController.searchBar.delegate = self
+        searchController.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.searchController = searchController
     }
 
     // MARK:- UICollectionViewDataSource
@@ -80,7 +88,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! GalleryItemCollectionViewCell
-        
+        cell.image = nil
         cell.tag = indexPath.row
         cell.activityIndicator.startAnimating()
         cell.isUserInteractionEnabled = false
@@ -100,6 +108,20 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         }
         return cell
     }
+    
+    func fetchRandomPhotos() {
+        
+        guard let url = randomImagesRequestURL else { return }
+        
+        NetworkService.shared.fetchDataFromURL(url) { [weak self] data in
+            
+            guard let jsonData = try? self?.decoder.decode([UnsplashImageData].self, from: data)
+            else {
+                print("Can't decode for first load! Check your load limit")
+                return }
+            self?.imagesData = jsonData
+        }
+    }
 
     // MARK:- UICollectionViewDelegate
 
@@ -107,7 +129,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? GalleryItemCollectionViewCell else { return }
         let detailsVC = DetailsViewController()
-        detailsVC.imageData = randomImagesData[indexPath.row]
+        detailsVC.imageData = imagesData[indexPath.row]
         detailsVC.image = cell.image
         navigationController?.pushViewController(detailsVC, animated: true)
     }
@@ -123,5 +145,46 @@ extension HomeScreenCollectionViewController: UICollectionViewDelegateFlowLayout
         let cellWidth = (collectionViewFrame.width - (cellsInRowCount - 1) * 2 - cellsSpacing * (cellsInRowCount + 1)) / cellsInRowCount
         
         return CGSize(width: cellWidth, height: cellWidth)
+    }
+}
+
+// MARK:- UISearchControllerDelegate
+
+extension HomeScreenCollectionViewController: UISearchControllerDelegate, UISearchBarDelegate {
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+                
+        guard let searchText = searchBar.text else { return }
+        
+        guard let url = searchImagesRequestURL else { return }
+
+        NetworkService.shared.fetchDataFromURL(url, searchText: searchText) { [weak self] data in
+
+            guard let jsonData = try? self?.decoder.decode(SearchedImagesData.self, from: data)
+            else {
+                print("Can't decode!!!")
+                return }
+            
+            self?.imagesData = []
+            
+            for result in jsonData.results {
+                guard let url = URL(string: "https://api.unsplash.com/photos/" + result.id) else { return }
+                
+                NetworkService.shared.fetchDataFromURL(url) { singleImageData in
+                    
+                    guard let singleImageData = try? self?.decoder.decode(UnsplashImageData.self, from: singleImageData)
+                    else {
+                        print("Can't decode Single Image data!")
+                        return }
+                    
+                    self?.imagesData.append(singleImageData)
+                }
+            }
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetchRandomPhotos()
     }
 }

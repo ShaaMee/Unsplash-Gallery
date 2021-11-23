@@ -25,6 +25,7 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         didSet {
             guard let image = image else {
                 imageView.image = nil
+                imageView.layoutSubviews()
                 return
             }
             imageView = UIImageView(image: image)

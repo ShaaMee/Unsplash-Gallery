@@ -8,6 +8,7 @@
 import Foundation
 
 struct UnsplashImageData: Codable {
+    let id: String
     let createdAt: Date
     let urls: Urls
     let user: User
