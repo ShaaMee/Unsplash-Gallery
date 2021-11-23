@@ -66,6 +66,8 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    // MARK:- Preparing cell for reuse
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil

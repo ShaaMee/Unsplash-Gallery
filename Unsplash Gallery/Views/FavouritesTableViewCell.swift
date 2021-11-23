@@ -58,6 +58,8 @@ class FavouritesTableViewCell: UITableViewCell {
         ])
     }
     
+    // MARK:- Preparing cell for reuse
+
     override func prepareForReuse() {
         super.prepareForReuse()
         pictureView.image = nil
