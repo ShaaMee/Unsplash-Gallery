@@ -51,16 +51,6 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         
         fetchRandomPhotos()
         
-//        guard let url = randomImagesRequestURL else { return }
-//
-//        NetworkService.shared.fetchDataFromURL(url) { [weak self] data in
-//
-//            guard let jsonData = try? self?.decoder.decode([UnsplashImageData].self, from: data)
-//            else {
-//                print("Can't decode for first load! Check your load limit")
-//                return }
-//            self?.imagesData = jsonData
-//        }
     }
     
     // MARK:- Setting up views
@@ -94,7 +84,11 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         cell.isUserInteractionEnabled = false
         guard let url = URL(string: imagesURLStrings[indexPath.row]) else { return cell }
         
-        NetworkService.shared.fetchDataFromURL(url) { imageData in
+        NetworkService.shared.fetchDataFromURL(url) { imageData, errorText in
+            
+            if let errorText = errorText {
+                AlertService.shared.showAlertWith(messeage: errorText, inViewController: self)
+            }
             
             guard let image = UIImage(data: imageData) else { return }
             
@@ -113,13 +107,19 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         
         guard let url = randomImagesRequestURL else { return }
         
-        NetworkService.shared.fetchDataFromURL(url) { [weak self] data in
+        NetworkService.shared.fetchDataFromURL(url) { [weak self] data, errorText in
             
-            guard let jsonData = try? self?.decoder.decode([UnsplashImageData].self, from: data)
+            guard let self = self else { return }
+            
+            if let errorText = errorText {
+                AlertService.shared.showAlertWith(messeage: errorText, inViewController: self)
+            }
+            
+            guard let jsonData = try? self.decoder.decode([UnsplashImageData].self, from: data)
             else {
                 print("Can't decode for first load! Check your load limit")
                 return }
-            self?.imagesData = jsonData
+            self.imagesData = jsonData
         }
     }
 
@@ -159,7 +159,7 @@ extension HomeScreenCollectionViewController: UISearchControllerDelegate, UISear
         
         guard let url = searchImagesRequestURL else { return }
 
-        NetworkService.shared.fetchDataFromURL(url, searchText: searchText) { [weak self] data in
+        NetworkService.shared.fetchDataFromURL(url, searchText: searchText) { [weak self] data, _ in
 
             guard let jsonData = try? self?.decoder.decode(SearchedImagesData.self, from: data)
             else {
@@ -171,7 +171,7 @@ extension HomeScreenCollectionViewController: UISearchControllerDelegate, UISear
             for result in jsonData.results {
                 guard let url = URL(string: "https://api.unsplash.com/photos/" + result.id) else { return }
                 
-                NetworkService.shared.fetchDataFromURL(url) { singleImageData in
+                NetworkService.shared.fetchDataFromURL(url) { singleImageData, _ in
                     
                     guard let singleImageData = try? self?.decoder.decode(UnsplashImageData.self, from: singleImageData)
                     else {

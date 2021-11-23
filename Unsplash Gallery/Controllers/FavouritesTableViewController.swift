@@ -56,7 +56,7 @@ class FavouritesTableViewController: UITableViewController {
         
         cell.tag = indexPath.row
         
-        NetworkService.shared.fetchDataFromURL(url) { imageData in
+        NetworkService.shared.fetchDataFromURL(url) { imageData, _ in
             
             guard let image = UIImage(data: imageData) else { return }
             

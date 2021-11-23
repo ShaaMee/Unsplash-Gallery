@@ -15,12 +15,13 @@ class NetworkService {
     private let clientID = "Client-ID V3zkhd96J-spd6EtpmlyaMwM7ONhGPsDYZqgwWTAkkM"
     private let imagesCount = 30
     
-    func fetchDataFromURL(_ url: URL, searchText: String? = nil, completion: @escaping ((Data) -> ())) {
+    
+    func fetchDataFromURL(_ url: URL, searchText: String? = nil, completion: @escaping ((Data, String?) -> ())) {
         
         var parameters: Parameters
         
         if let searchText = searchText {
-            parameters = ["query":searchText]
+            parameters = ["query":searchText,"per_page":imagesCount] //<-- per page didn't check
         } else {
             parameters = ["count":imagesCount]
         }
@@ -30,11 +31,18 @@ class NetworkService {
                    headers: [HTTPHeader(name: "Authorization", value: clientID)])
             .validate()
             .responseData(completionHandler: { response in
+                
                 guard let data = response.data else {
                     print("No Data")
                     return
                 }
-                completion(data)
+                
+                guard let errorText = String(data: data, encoding: .ascii) else {
+                    completion(data, nil)
+                    return
+                }
+                    completion(data, errorText)
+                
             })
     }
 }
