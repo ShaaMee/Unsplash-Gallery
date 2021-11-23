@@ -52,17 +52,16 @@ class DetailsViewController: UIViewController {
         return view
     }()
     
-    private var authorNameLabel = UILabel()
-    private var dateCreatedLabel = UILabel()
-    private var locationLabel = UILabel()
-    private var downloadsCountLabel = UILabel()
-    
-    // Setting the dateFormatter to get the album's year of release
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         return formatter
     }()
+    
+    private var authorNameLabel = UILabel()
+    private var dateCreatedLabel = UILabel()
+    private var locationLabel = UILabel()
+    private var downloadsCountLabel = UILabel()
     
     
     // MARK:- viewDidLoad()

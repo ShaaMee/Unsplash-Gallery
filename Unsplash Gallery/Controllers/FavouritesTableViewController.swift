@@ -81,6 +81,25 @@ class FavouritesTableViewController: UITableViewController {
         let detailsVC = DetailsViewController()
         detailsVC.imageData = favouritesArray[indexPath.row]
         detailsVC.image = cell.picture
-        navigationController?.pushViewController(detailsVC, animated: true)    }
+        navigationController?.pushViewController(detailsVC, animated: true)
+    }
 
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        
+        if editingStyle == .delete {
+            
+            let key = favouritesArray[indexPath.row].urls.small
+            
+            guard favouritesDictionary.keys.contains(key) else { return }
+            
+            Persistance.shared.removeObjectWithKey(key, ofType: UnsplashImageData.self)
+            
+            tableView.reloadData()
+        }
+    }
 }

@@ -11,7 +11,6 @@ class ImageService {
     
     static let shared = ImageService()
     
-    // Using image caching
     private var imageCache = NSCache<NSString, UIImage>()
     
     func image(forURLString urlString: String, completion: @escaping (UIImage?, String?) -> () ){

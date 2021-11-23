@@ -13,9 +13,12 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     
     private let randomImagesRequestURL = URL(string: "https://api.unsplash.com/photos/random")
     private let searchImagesRequestURL = URL(string: "https://api.unsplash.com/search/photos")
+    private let singleSearchedImageURLString = "https://api.unsplash.com/photos/"
     private let cellsInRowCount: CGFloat = 2.0
     private let cellsSpacing: CGFloat = 8.0
-    
+    private let refreshIndicator = UIRefreshControl()
+
+
     private var imagesData: [UnsplashImageData] = [] {
         didSet {
             var imagesURLs = [String]()
@@ -68,11 +71,14 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
+        
+        refreshIndicator.addTarget(self, action: #selector(fetchRandomPhotos), for: .valueChanged)
+        collectionView.refreshControl = refreshIndicator
     }
     
     //MARK:- Fetch random photos
     
-    func fetchRandomPhotos() {
+    @objc func fetchRandomPhotos() {
         
         guard let url = randomImagesRequestURL else { return }
         
@@ -89,6 +95,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
                 print("Can't decode for first load! Check your load limit")
                 return }
             self.imagesData = jsonData
+            self.refreshIndicator.endRefreshing()
         }
     }
 
@@ -156,36 +163,40 @@ extension HomeScreenCollectionViewController: UISearchControllerDelegate, UISear
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
                 
-        guard let searchText = searchBar.text else { return }
-        
-        guard let url = searchImagesRequestURL else { return }
+        guard let searchText = searchBar.text,
+              let url = searchImagesRequestURL
+        else { return }
 
         NetworkService.shared.fetchDataFromURL(url, searchText: searchText) { [weak self] data, _ in
-
-            guard let jsonData = try? self?.decoder.decode(SearchedImagesData.self, from: data)
+            
+            guard let self = self else { return }
+            guard let jsonData = try? self.decoder.decode(SearchedImagesData.self, from: data)
             else {
-                print("Can't decode!!!")
+                print("Can't decode searched images data!!!")
                 return }
             
-            self?.imagesData = []
+            self.imagesData = []
             
             for result in jsonData.results {
-                guard let url = URL(string: "https://api.unsplash.com/photos/" + result.id) else { return }
+                guard let url = URL(string: self.singleSearchedImageURLString + result.id) else { return }
                 
                 NetworkService.shared.fetchDataFromURL(url) { singleImageData, _ in
                     
-                    guard let singleImageData = try? self?.decoder.decode(UnsplashImageData.self, from: singleImageData)
+                    guard let singleImageData = try? self.decoder.decode(UnsplashImageData.self, from: singleImageData)
                     else {
                         print("Can't decode Single Image data!")
                         return }
                     
-                    self?.imagesData.append(singleImageData)
+                    self.imagesData.append(singleImageData)
                 }
             }
         }
     }
     
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        imagesData = []
+        collectionView.reloadData()
         fetchRandomPhotos()
     }
 }

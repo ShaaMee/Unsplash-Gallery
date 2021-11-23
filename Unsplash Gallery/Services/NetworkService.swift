@@ -13,13 +13,14 @@ class NetworkService {
     static let shared = NetworkService()
     
     private let clientID = "Client-ID V3zkhd96J-spd6EtpmlyaMwM7ONhGPsDYZqgwWTAkkM"
-    private let imagesCount = 30
+    private let imagesCount = 10
     
     
     func fetchDataFromURL(_ url: URL, searchText: String? = nil, completion: @escaping ((Data, String?) -> ())) {
         
         var parameters: Parameters
-        
+       
+        // Different request parameters for random photos and search result
         if let searchText = searchText {
             parameters = ["query":searchText,"per_page":imagesCount] //<-- per page didn't check
         } else {
@@ -37,6 +38,7 @@ class NetworkService {
                     return
                 }
                 
+                // Checking if request limit is exceeded.
                 guard let errorText = String(data: data, encoding: .ascii),
                       errorText == "Rate Limit Exceeded" else {
                     completion(data, nil)
