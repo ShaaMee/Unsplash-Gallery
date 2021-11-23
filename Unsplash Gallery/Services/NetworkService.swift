@@ -25,7 +25,7 @@ class NetworkService {
         } else {
             parameters = ["count":imagesCount]
         }
-                
+        
         AF.request(url,
                    parameters: parameters,
                    headers: [HTTPHeader(name: "Authorization", value: clientID)])
@@ -37,12 +37,12 @@ class NetworkService {
                     return
                 }
                 
-                guard let errorText = String(data: data, encoding: .ascii) else {
+                guard let errorText = String(data: data, encoding: .ascii),
+                      errorText == "Rate Limit Exceeded" else {
                     completion(data, nil)
                     return
                 }
-                    completion(data, errorText)
-                
+                completion(data, errorText)
             })
     }
 }

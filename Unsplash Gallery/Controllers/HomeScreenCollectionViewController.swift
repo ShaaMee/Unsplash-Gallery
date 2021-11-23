@@ -69,39 +69,8 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
     }
-
-    // MARK:- UICollectionViewDataSource
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imagesURLStrings.count
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! GalleryItemCollectionViewCell
-        cell.image = nil
-        cell.tag = indexPath.row
-        cell.activityIndicator.startAnimating()
-        cell.isUserInteractionEnabled = false
-        guard let url = URL(string: imagesURLStrings[indexPath.row]) else { return cell }
-        
-        NetworkService.shared.fetchDataFromURL(url) { imageData, errorText in
-            
-            if let errorText = errorText {
-                AlertService.shared.showAlertWith(messeage: errorText, inViewController: self)
-            }
-            
-            guard let image = UIImage(data: imageData) else { return }
-            
-            if cell.tag == indexPath.row {
-                DispatchQueue.main.async {
-                    cell.image = image
-                    cell.activityIndicator.stopAnimating()
-                    cell.isUserInteractionEnabled = true
-                }
-            }
-        }
-        return cell
-    }
+    
+    //MARK:- Fetch random photos
     
     func fetchRandomPhotos() {
         
@@ -121,6 +90,38 @@ class HomeScreenCollectionViewController: UICollectionViewController {
                 return }
             self.imagesData = jsonData
         }
+    }
+
+    // MARK:- UICollectionViewDataSource
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imagesURLStrings.count
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! GalleryItemCollectionViewCell
+        cell.image = nil
+        cell.tag = indexPath.row
+        cell.activityIndicator.startAnimating()
+        cell.isUserInteractionEnabled = false
+                
+        ImageService.shared.image(forURLString: imagesURLStrings[indexPath.row]) { (image, errorText) in
+            
+            if let errorText = errorText {
+                AlertService.shared.showAlertWith(messeage: errorText, inViewController: self)
+            }
+            
+            guard let image = image else { return }
+            
+            if cell.tag == indexPath.row {
+                DispatchQueue.main.async {
+                    cell.image = image
+                    cell.activityIndicator.stopAnimating()
+                    cell.isUserInteractionEnabled = true
+                }
+            }
+        }
+        return cell
     }
 
     // MARK:- UICollectionViewDelegate

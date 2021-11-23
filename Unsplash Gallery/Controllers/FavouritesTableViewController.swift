@@ -52,13 +52,11 @@ class FavouritesTableViewController: UITableViewController {
         
         cell.artistNameLabel.text = favouritesArray[indexPath.row].user.name
         
-        guard let url = URL(string: favouritesArray[indexPath.row].urls.small) else { return cell }
-        
         cell.tag = indexPath.row
         
-        NetworkService.shared.fetchDataFromURL(url) { imageData, _ in
+        ImageService.shared.image(forURLString: favouritesArray[indexPath.row].urls.small) { (image, _) in
             
-            guard let image = UIImage(data: imageData) else { return }
+            guard let image = image else { return }
             
             if cell.tag == indexPath.row {
                 DispatchQueue.main.async {

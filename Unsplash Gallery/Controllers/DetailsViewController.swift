@@ -57,6 +57,13 @@ class DetailsViewController: UIViewController {
     private var locationLabel = UILabel()
     private var downloadsCountLabel = UILabel()
     
+    // Setting the dateFormatter to get the album's year of release
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        return formatter
+    }()
+    
     
     // MARK:- viewDidLoad()
 
@@ -98,7 +105,7 @@ class DetailsViewController: UIViewController {
         authorNameLabel.textAlignment = .center
         
         authorNameLabel.text = imageData.user.name
-        dateCreatedLabel.text = "Created: \(imageData.createdAt.description)"
+        dateCreatedLabel.text = "Created: \(dateFormatter.string(from: imageData.createdAt))"
         locationLabel.text = "Location: \(imageData.location.title ?? "N/A")"
         downloadsCountLabel.text = "Total downdloads: \(imageData.downloads.description)"
     }
