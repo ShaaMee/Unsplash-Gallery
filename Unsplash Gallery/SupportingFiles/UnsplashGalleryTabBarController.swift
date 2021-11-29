@@ -33,7 +33,6 @@ class UnsplashGalleryTabBarController: UITabBarController {
         
         setViewControllers([homeScreenNavigationVC, favouritesNavigationVC], animated: false)
     }
-    
 }
 
 

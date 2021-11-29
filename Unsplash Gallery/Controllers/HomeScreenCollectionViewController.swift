@@ -18,7 +18,6 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     private let cellsSpacing: CGFloat = 8.0
     private let refreshIndicator = UIRefreshControl()
 
-
     private var imagesData: [UnsplashImageData] = [] {
         didSet {
             var imagesURLs = [String]()
@@ -139,7 +138,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         guard let cell = collectionView.cellForItem(at: indexPath) as? GalleryItemCollectionViewCell else { return }
         let detailsVC = DetailsViewController()
         detailsVC.imageData = imagesData[indexPath.row]
-        detailsVC.image = cell.image
+        detailsVC.mainView.image = cell.image
         navigationController?.pushViewController(detailsVC, animated: true)
     }
 
@@ -193,7 +192,6 @@ extension HomeScreenCollectionViewController: UISearchControllerDelegate, UISear
             }
         }
     }
-    
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         imagesData = []

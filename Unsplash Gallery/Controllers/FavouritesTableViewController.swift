@@ -83,7 +83,7 @@ class FavouritesTableViewController: UITableViewController {
         guard let cell = tableView.cellForRow(at: indexPath) as? FavouritesTableViewCell else { return }
         let detailsVC = DetailsViewController()
         detailsVC.imageData = favouritesArray[indexPath.row]
-        detailsVC.image = cell.picture
+        detailsVC.mainView.image = cell.picture
         navigationController?.pushViewController(detailsVC, animated: true)
     }
 
