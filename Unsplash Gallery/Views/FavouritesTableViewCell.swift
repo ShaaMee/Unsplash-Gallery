@@ -20,7 +20,7 @@ class FavouritesTableViewCell: UITableViewCell {
     
     var artistNameLabel = UILabel()
     
-    // MARK:- layoutSubviews()
+    // MARK: - layoutSubviews()
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -29,7 +29,7 @@ class FavouritesTableViewCell: UITableViewCell {
         setupConstraints()
     }
     
-    // MARK:- Setting up views
+    // MARK: - Setting up views
 
     private func setupViews() {
         pictureView.backgroundColor = .systemGray5
@@ -43,7 +43,7 @@ class FavouritesTableViewCell: UITableViewCell {
         contentView.addSubview(artistNameLabel)
     }
     
-    // MARK:- Setting up constraints
+    // MARK: - Setting up constraints
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -58,7 +58,7 @@ class FavouritesTableViewCell: UITableViewCell {
         ])
     }
     
-    // MARK:- Preparing cell for reuse
+    // MARK: - Preparing cell for reuse
 
     override func prepareForReuse() {
         super.prepareForReuse()

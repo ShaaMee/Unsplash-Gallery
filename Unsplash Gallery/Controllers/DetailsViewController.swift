@@ -64,7 +64,7 @@ class DetailsViewController: UIViewController {
     private var downloadsCountLabel = UILabel()
     
     
-    // MARK:- viewDidLoad()
+    // MARK: - viewDidLoad()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +74,7 @@ class DetailsViewController: UIViewController {
         setupConstraints()
     }
     
-    // MARK:- viewWillAppear() (Changing state of heart icon)
+    // MARK: - viewWillAppear() (Changing state of heart icon)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -83,7 +83,7 @@ class DetailsViewController: UIViewController {
         isFavourite = Persistance.shared.storesObjectForKey(key, ofType: UnsplashImageData.self)
     }
     
-    // MARK:- Setting up views
+    // MARK: - Setting up views
 
     private func setupViews(_ imageData: UnsplashImageData) {
         
@@ -109,7 +109,7 @@ class DetailsViewController: UIViewController {
         downloadsCountLabel.text = "Total downdloads: \(imageData.downloads.description)"
     }
     
-    // MARK:- Setting up constraints
+    // MARK: - Setting up constraints
 
     private func setupConstraints() {
         
@@ -147,7 +147,7 @@ class DetailsViewController: UIViewController {
         ])
     }
     
-    // MARK:- Favourite button action
+    // MARK: - Favourite button action
 
     @objc private func toggleFavourite(){
         isFavourite.toggle()

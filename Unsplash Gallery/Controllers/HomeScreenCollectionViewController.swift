@@ -43,7 +43,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         return decoder
     }()
     
-    // MARK:- viewDidLoad()
+    // MARK: - viewDidLoad()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         
     }
     
-    // MARK:- Setting up views
+    // MARK: - Setting up views
     
     private func setupViews() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +76,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         collectionView.refreshControl = refreshIndicator
     }
     
-    //MARK:- Fetch random photos
+    //MARK: - Fetch random photos
     
     @objc func fetchRandomPhotos() {
         
@@ -99,7 +99,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         }
     }
 
-    // MARK:- UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imagesURLStrings.count
@@ -131,7 +131,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         return cell
     }
 
-    // MARK:- UICollectionViewDelegate
+    // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -144,7 +144,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
 
 }
 
-// MARK:- UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension HomeScreenCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -156,7 +156,7 @@ extension HomeScreenCollectionViewController: UICollectionViewDelegateFlowLayout
     }
 }
 
-// MARK:- UISearchControllerDelegate
+// MARK: - UISearchControllerDelegate
 
 extension HomeScreenCollectionViewController: UISearchControllerDelegate, UISearchBarDelegate {
     

@@ -32,7 +32,7 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // MARK:- layoutSubviews()
+    // MARK: - layoutSubviews()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -41,7 +41,7 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         setupConstraints()
     }
     
-    // MARK:- Setting up views
+    // MARK: - Setting up views
 
     private func setupViews() {
         layer.cornerRadius = 16
@@ -53,7 +53,7 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         clipsToBounds = true
     }
     
-    // MARK:- Setting up constraints
+    // MARK: - Setting up constraints
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -66,7 +66,7 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    // MARK:- Preparing cell for reuse
+    // MARK: - Preparing cell for reuse
     
     override func prepareForReuse() {
         super.prepareForReuse()

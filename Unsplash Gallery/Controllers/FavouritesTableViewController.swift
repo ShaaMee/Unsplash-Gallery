@@ -23,7 +23,7 @@ class FavouritesTableViewController: UITableViewController {
         return array.sorted { $0.user.name.lowercased() < $1.user.name.lowercased() }
     }
 
-    // MARK:- viewDidLoad()
+    // MARK: - viewDidLoad()
 
     override func viewDidLoad() {
         super.viewDidLoad()
