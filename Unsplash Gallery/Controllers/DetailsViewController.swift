@@ -87,7 +87,7 @@ class DetailsViewController: UIViewController {
 
     private func setupViews(_ imageData: UnsplashImageData) {
         
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         for view in [authorNameLabel, dateCreatedLabel, locationLabel, downloadsCountLabel] {
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -156,8 +156,8 @@ class DetailsViewController: UIViewController {
               let key = persistanceKey else { return }
         
         switch isFavourite {
-        case true:  Persistance.shared.addObject(storedData, withKey: key)
-        default:    Persistance.shared.removeObjectWithKey(key, ofType: UnsplashImageData.self)
+        case true: Persistance.shared.addObject(storedData, withKey: key)
+        default: Persistance.shared.removeObjectWithKey(key, ofType: UnsplashImageData.self)
         }
     }
 }

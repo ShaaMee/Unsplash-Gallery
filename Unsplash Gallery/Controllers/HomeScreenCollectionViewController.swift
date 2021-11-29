@@ -48,19 +48,17 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard let collectionView = collectionView else { return }
+        collectionView.register(GalleryItemCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         setupViews()
-
-        self.collectionView!.register(GalleryItemCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
         fetchRandomPhotos()
-        
     }
     
     // MARK: - Setting up views
     
     private func setupViews() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.contentInset = UIEdgeInsets(top: cellsSpacing, left: cellsSpacing, bottom: cellsSpacing, right: cellsSpacing)
         collectionView.contentInsetAdjustmentBehavior = .automatic
         
@@ -106,7 +104,10 @@ class HomeScreenCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! GalleryItemCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? GalleryItemCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
         cell.image = nil
         cell.tag = indexPath.row
         cell.activityIndicator.startAnimating()

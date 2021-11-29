@@ -16,25 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let flowLayout = UICollectionViewFlowLayout()
-        let homeScreenVC = HomeScreenCollectionViewController(collectionViewLayout: flowLayout)
-        let favouritesVC = FavouritesTableViewController()
-        
-        homeScreenVC.title = "Gallery"
-        homeScreenVC.tabBarItem.image = UIImage(systemName: "photo")
-        favouritesVC.title = "Favourites"
-        favouritesVC.tabBarItem.image = UIImage(systemName: "star")
-
-        let homeScreenNavigationVC = UINavigationController(rootViewController: homeScreenVC)
-        let favouritesNavigationVC = UINavigationController(rootViewController: favouritesVC)
-        
-        let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([homeScreenNavigationVC, favouritesNavigationVC], animated: false)
-        
-        window.rootViewController = tabBarController
+        window.rootViewController = UnsplashGalleryTabBarController()
         window.makeKeyAndVisible()
         self.window = window
     }
-
 }
-

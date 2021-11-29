@@ -29,7 +29,7 @@ class FavouritesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.tableView.register(FavouritesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
     
     // MARK: - viewWillAppear()
@@ -48,7 +48,10 @@ class FavouritesTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! FavouritesTableViewCell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? FavouritesTableViewCell else {
+            return UITableViewCell()
+        }
         
         cell.artistNameLabel.text = favouritesArray[indexPath.row].user.name
         
