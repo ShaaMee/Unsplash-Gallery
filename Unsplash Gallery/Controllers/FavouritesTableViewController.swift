@@ -20,7 +20,7 @@ class FavouritesTableViewController: UITableViewController {
         favouritesDictionary.forEach { (_, value) in
             array.append(value)
         }
-        return array.sorted { $0.user.name.lowercased() < $1.user.name.lowercased() }
+        return array.sorted { ($0.user.name.lowercased(), $0.id) < ($1.user.name.lowercased(), $1.id) }
     }
 
     // MARK: - viewDidLoad()
