@@ -11,13 +11,13 @@ private let reuseIdentifier = "galleryCell"
 
 class HomeScreenCollectionViewController: UICollectionViewController {
     
-    private let randomImagesRequestURL = URL(string: "https://api.unsplash.com/photos/random")
-    private let searchImagesRequestURL = URL(string: "https://api.unsplash.com/search/photos")
-    private let singleSearchedImageURLString = "https://api.unsplash.com/photos/"
-    private let cellsInRowCount: CGFloat = 2.0
-    private let cellsSpacing: CGFloat = 8.0
-    private let refreshIndicator = UIRefreshControl()
-
+    private var mainCollectionView: HomeScreenCollectionView {
+        guard let view = self.collectionView as? HomeScreenCollectionView else {
+            return HomeScreenCollectionView()
+        }
+        return view
+    }
+    
     private var imagesData: [UnsplashImageData] = [] {
         didSet {
             var imagesURLs = [String]()
@@ -27,6 +27,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
             imagesURLStrings = imagesURLs
         }
     }
+    
     private var imagesURLStrings: [String] = [] {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -35,45 +36,58 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         }
     }
     
-    private let decoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .iso8601
-        return decoder
-    }()
+    let refreshIndicator = UIRefreshControl()
+    private let decoder = JSONDecoder()
+    private let cellsInRowCount: CGFloat = 2.0
+    private let randomImagesRequestURL = URL(string: "https://api.unsplash.com/photos/random")
+    private let searchImagesRequestURL = URL(string: "https://api.unsplash.com/search/photos")
+    private let singleSearchedImageURLString = "https://api.unsplash.com/photos/"
+    
+    
+    // MARK: - loadView()
+    
+    override func loadView() {
+        collectionView = HomeScreenCollectionView()
+    }
     
     // MARK: - viewDidLoad()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let collectionView = collectionView else { return }
         collectionView.register(GalleryItemCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         setupViews()
+        setupJSONDecoder()
         fetchRandomPhotos()
     }
     
     // MARK: - Setting up views
     
     private func setupViews() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .systemBackground
-        collectionView.contentInset = UIEdgeInsets(top: cellsSpacing, left: cellsSpacing, bottom: cellsSpacing, right: cellsSpacing)
-        collectionView.contentInsetAdjustmentBehavior = .automatic
-        
-        // Creating and seting up a UISearchController
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.delegate = self
-        searchController.delegate = self
-        searchController.obscuresBackgroundDuringPresentation = false
+        setupSearchController()
+        setupRefreshControl()
+    }
+    
+    private func setupSearchController() {
+        mainCollectionView.searchController.searchBar.delegate = self
+        mainCollectionView.searchController.delegate = self
         navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.searchController = searchController
-        
+        navigationItem.searchController = mainCollectionView.searchController
+    }
+    
+    private func setupRefreshControl() {
         refreshIndicator.addTarget(self, action: #selector(fetchRandomPhotos), for: .valueChanged)
         collectionView.refreshControl = refreshIndicator
     }
     
-    //MARK: - Fetch random photos
+    // MARK: - Setting up JSON Decoder
+    
+    private func setupJSONDecoder() {
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+    }
+    
+    // MARK: - Fetching random photos
     
     @objc func fetchRandomPhotos() {
         
@@ -95,13 +109,16 @@ class HomeScreenCollectionViewController: UICollectionViewController {
             self.refreshIndicator.endRefreshing()
         }
     }
+}
 
-    // MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 
+extension HomeScreenCollectionViewController {
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imagesURLStrings.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? GalleryItemCollectionViewCell else {
             return UICollectionViewCell()
@@ -111,7 +128,7 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         cell.tag = indexPath.row
         cell.activityIndicator.startAnimating()
         cell.isUserInteractionEnabled = false
-                
+        
         ImageService.shared.image(forURLString: imagesURLStrings[indexPath.row]) { (image, errorText) in
             
             if let errorText = errorText {
@@ -130,18 +147,21 @@ class HomeScreenCollectionViewController: UICollectionViewController {
         }
         return cell
     }
+}
 
-    // MARK: - UICollectionViewDelegate
+// MARK: - UICollectionViewDelegate
 
+extension HomeScreenCollectionViewController {
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? GalleryItemCollectionViewCell else { return }
         let detailsVC = DetailsViewController()
         detailsVC.imageData = imagesData[indexPath.row]
-        detailsVC.mainView.image = cell.image
+        guard let image = cell.image  else { return }
+        detailsVC.image = image
         navigationController?.pushViewController(detailsVC, animated: true)
     }
-
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -150,7 +170,7 @@ extension HomeScreenCollectionViewController: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let collectionViewFrame = collectionView.frame
-        let cellWidth = (collectionViewFrame.width - (cellsInRowCount - 1) * 2 - cellsSpacing * (cellsInRowCount + 1)) / cellsInRowCount
+        let cellWidth = (collectionViewFrame.width - (cellsInRowCount - 1) * 2 - mainCollectionView.cellsSpacing * (cellsInRowCount + 1)) / cellsInRowCount
         
         return CGSize(width: cellWidth, height: cellWidth)
     }
@@ -162,11 +182,11 @@ extension HomeScreenCollectionViewController: UISearchControllerDelegate, UISear
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-                
+        
         guard let searchText = searchBar.text,
               let url = searchImagesRequestURL
         else { return }
-
+        
         NetworkService.shared.fetchDataFromURL(url, searchText: searchText) { [weak self] data, _ in
             
             guard let self = self else { return }

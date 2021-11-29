@@ -9,9 +9,9 @@ import Foundation
 import Alamofire
 
 class NetworkService {
-    
     static let shared = NetworkService()
-    
+    private init(){}
+
     private let clientID = "Client-ID V3zkhd96J-spd6EtpmlyaMwM7ONhGPsDYZqgwWTAkkM"
     private let imagesCount = 10
     
@@ -22,7 +22,7 @@ class NetworkService {
        
         // Different request parameters for random photos and search result
         if let searchText = searchText {
-            parameters = ["query":searchText,"per_page":imagesCount] //<-- per page didn't check
+            parameters = ["query":searchText,"per_page":imagesCount]
         } else {
             parameters = ["count":imagesCount]
         }

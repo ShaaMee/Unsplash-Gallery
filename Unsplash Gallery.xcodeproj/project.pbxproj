@@ -21,6 +21,7 @@
 		CE7AF0D0274C2F5400DD1FBA /* FavouritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7AF0CF274C2F5400DD1FBA /* FavouritesTableViewCell.swift */; };
 		CE8E454127555400004C76CA /* UnsplashGalleryTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E454027555400004C76CA /* UnsplashGalleryTabBarController.swift */; };
 		CE8E454427555711004C76CA /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E454327555711004C76CA /* DetailsView.swift */; };
+		CE8E45472755635D004C76CA /* HomeScreenCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E45462755635D004C76CA /* HomeScreenCollectionView.swift */; };
 		CE9BF122274A3C640050A164 /* HomeScreenCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */; };
 		CE9BF125274A3D670050A164 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */; };
 		CE9BF12A274A5A850050A164 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BF129274A5A850050A164 /* NetworkService.swift */; };
@@ -48,6 +49,7 @@
 		CE7AF0CF274C2F5400DD1FBA /* FavouritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewCell.swift; sourceTree = "<group>"; };
 		CE8E454027555400004C76CA /* UnsplashGalleryTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UnsplashGalleryTabBarController.swift; path = "Unsplash Gallery/SupportingFiles/UnsplashGalleryTabBarController.swift"; sourceTree = SOURCE_ROOT; };
 		CE8E454327555711004C76CA /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		CE8E45462755635D004C76CA /* HomeScreenCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCollectionView.swift; sourceTree = "<group>"; };
 		CE9BF121274A3C640050A164 /* HomeScreenCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCollectionViewController.swift; sourceTree = "<group>"; };
 		CE9BF124274A3D670050A164 /* FavouritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewController.swift; sourceTree = "<group>"; };
 		CE9BF129274A5A850050A164 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -108,8 +110,7 @@
 		CE0BBDCF274B6FC30072EB86 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CE0BBDC8274A85E10072EB86 /* GalleryItemCollectionViewCell.swift */,
-				CE7AF0CF274C2F5400DD1FBA /* FavouritesTableViewCell.swift */,
+				CE8E45462755635D004C76CA /* HomeScreenCollectionView.swift */,
 				CE8E454327555711004C76CA /* DetailsView.swift */,
 			);
 			path = Views;
@@ -139,12 +140,22 @@
 			children = (
 				CE9BF131274A62690050A164 /* Model */,
 				CE0BBDCF274B6FC30072EB86 /* Views */,
+				CE8E454B27556B35004C76CA /* Cells */,
 				CE0BBDCE274B6F9B0072EB86 /* Controllers */,
 				CE9BF132274A62830050A164 /* Services */,
 				CE0BBDCD274B6F570072EB86 /* SupportingFiles */,
 				CE574804274A378A004B3232 /* Info.plist */,
 			);
 			path = "Unsplash Gallery";
+			sourceTree = "<group>";
+		};
+		CE8E454B27556B35004C76CA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CE0BBDC8274A85E10072EB86 /* GalleryItemCollectionViewCell.swift */,
+				CE7AF0CF274C2F5400DD1FBA /* FavouritesTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		CE9BF131274A62690050A164 /* Model */ = {
@@ -284,6 +295,7 @@
 				CE047A58274CDB8200E61F97 /* SearchedImagesData.swift in Sources */,
 				CE5747FB274A3786004B3232 /* DetailsViewController.swift in Sources */,
 				CE9BF125274A3D670050A164 /* FavouritesTableViewController.swift in Sources */,
+				CE8E45472755635D004C76CA /* HomeScreenCollectionView.swift in Sources */,
 				CE5747F7274A3786004B3232 /* AppDelegate.swift in Sources */,
 				CE9BF12E274A62320050A164 /* UnsplashImageData.swift in Sources */,
 				CE0BBDC9274A85E10072EB86 /* GalleryItemCollectionViewCell.swift in Sources */,

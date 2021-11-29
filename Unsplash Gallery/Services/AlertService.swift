@@ -10,6 +10,8 @@ import UIKit
 class AlertService {
     static let shared = AlertService()
     
+    private init(){}
+    
     func showAlertWith(messeage: String, inViewController vc: UIViewController){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Oooops =(", message: messeage, preferredStyle: .alert)

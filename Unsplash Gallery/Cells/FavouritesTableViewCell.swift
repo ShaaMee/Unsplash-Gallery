@@ -10,15 +10,20 @@ import UIKit
 class FavouritesTableViewCell: UITableViewCell {
     
     private var pictureView = UIImageView()
+    private var artistNameLabel = UILabel()
     
+    var artistName: String = "" {
+        didSet{
+            artistNameLabel.text = artistName
+        }
+    }
+
     var picture = UIImage() {
         didSet {
             pictureView.image = picture
             layoutSubviews()
         }
     }
-    
-    var artistNameLabel = UILabel()
     
     // MARK: - layoutSubviews()
 
@@ -32,14 +37,22 @@ class FavouritesTableViewCell: UITableViewCell {
     // MARK: - Setting up views
 
     private func setupViews() {
+        setupPictureView()
+        setupArtistNameLabel()
+    }
+    
+    private func setupPictureView() {
         pictureView.backgroundColor = .systemGray5
         pictureView.layer.cornerRadius = 8
         pictureView.contentMode = .scaleAspectFill
         pictureView.clipsToBounds = true
         pictureView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(pictureView)
+    }
+
+    private func setupArtistNameLabel() {
         artistNameLabel.translatesAutoresizingMaskIntoConstraints = false
         artistNameLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        contentView.addSubview(pictureView)
         contentView.addSubview(artistNameLabel)
     }
     

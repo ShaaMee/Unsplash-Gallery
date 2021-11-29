@@ -27,33 +27,32 @@ class FavouritesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.register(FavouritesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        view.backgroundColor = .systemBackground
     }
     
     // MARK: - viewWillAppear()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.backgroundColor = .systemBackground
         tableView.reloadData()
     }
+}
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
 
+extension FavouritesTableViewController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return favouritesDictionary.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? FavouritesTableViewCell else {
             return UITableViewCell()
         }
         
-        cell.artistNameLabel.text = favouritesArray[indexPath.row].user.name
+        cell.artistName = favouritesArray[indexPath.row].user.name
         
         cell.tag = indexPath.row
         
@@ -71,19 +70,21 @@ class FavouritesTableViewController: UITableViewController {
         return cell
     }
     
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    
-    // MARK: - Table view delegate
+}
+
+// MARK: - Table view delegate
+
+extension FavouritesTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let cell = tableView.cellForRow(at: indexPath) as? FavouritesTableViewCell else { return }
         let detailsVC = DetailsViewController()
         detailsVC.imageData = favouritesArray[indexPath.row]
-        detailsVC.mainView.image = cell.picture
+        detailsVC.image = cell.picture
         navigationController?.pushViewController(detailsVC, animated: true)
     }
 

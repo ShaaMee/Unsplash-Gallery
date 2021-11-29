@@ -8,11 +8,11 @@
 import UIKit
 
 class ImageService {
-    
     static let shared = ImageService()
-    
     private var imageCache = NSCache<NSString, UIImage>()
     
+    private init(){}
+
     func image(forURLString urlString: String, completion: @escaping (UIImage?, String?) -> () ){
         
         // If there is a cached image then passing it to closure and returning nil dataTask

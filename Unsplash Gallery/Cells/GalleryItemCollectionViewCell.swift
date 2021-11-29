@@ -9,13 +9,7 @@ import UIKit
 
 class GalleryItemCollectionViewCell: UICollectionViewCell {
     
-    let activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView()
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.hidesWhenStopped = true
-        indicator.style = UIActivityIndicatorView.Style.large
-        return indicator
-    }()
+    let activityIndicator = UIActivityIndicatorView()
     
     private var imageView = UIImageView(frame: .zero) {
         didSet { layoutSubviews() }
@@ -42,19 +36,34 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Setting up views
-
+    
     private func setupViews() {
+        setupMainView()
+        setupImageView()
+        setupActivityIndicator()
+    }
+    
+    private func setupMainView(){
         layer.cornerRadius = 16
         backgroundColor = .systemGray5
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(imageView)
-        contentView.addSubview(activityIndicator)
         clipsToBounds = true
     }
     
+    private func setupImageView(){
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(imageView)
+    }
+    
+    private func setupActivityIndicator(){
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = UIActivityIndicatorView.Style.large
+        contentView.addSubview(activityIndicator)
+    }
+    
     // MARK: - Setting up constraints
-
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),

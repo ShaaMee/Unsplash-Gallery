@@ -9,7 +9,7 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
-    var mainView: DetailsView {
+    private var mainView: DetailsView {
         guard let view = self.view as? DetailsView else {
             return DetailsView()
         }
@@ -17,7 +17,14 @@ class DetailsViewController: UIViewController {
     }
         
     var imageData: UnsplashImageData?
+    private let dateFormatter = DateFormatter()
     
+    var image = UIImage() {
+        didSet{
+            mainView.image = image
+        }
+    }
+
     private var persistanceKey: String? {
         imageData?.urls.small
     }
@@ -43,6 +50,19 @@ class DetailsViewController: UIViewController {
         setupViews(imageData)
     }
     
+    // MARK: - Setting up labels, button and DateFormatter
+
+    private func setupViews(_ imageData: UnsplashImageData) {
+                
+        mainView.authorNameLabel.text = imageData.user.name
+        mainView.dateCreatedLabel.text = "Created: \(dateFormatter.string(from: imageData.createdAt))"
+        mainView.locationLabel.text = "Location: \(imageData.location.title ?? "N/A")"
+        mainView.downloadsCountLabel.text = "Total downdloads: \(imageData.downloads.description)"
+
+        mainView.favouriteButton.addTarget(self, action: #selector(toggleFavourite), for: .touchUpInside)
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+    }
+    
     // MARK: - viewWillAppear() (Changing state of heart icon)
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,18 +70,6 @@ class DetailsViewController: UIViewController {
         
         guard let key = persistanceKey else { return }
         isFavourite = Persistance.shared.storesObjectForKey(key, ofType: UnsplashImageData.self)
-    }
-    
-    // MARK: - Setting up labels and button target action
-
-    private func setupViews(_ imageData: UnsplashImageData) {
-                
-        mainView.authorNameLabel.text = imageData.user.name
-        mainView.dateCreatedLabel.text = "Created: \(mainView.dateFormatter.string(from: imageData.createdAt))"
-        mainView.locationLabel.text = "Location: \(imageData.location.title ?? "N/A")"
-        mainView.downloadsCountLabel.text = "Total downdloads: \(imageData.downloads.description)"
-        
-        mainView.favouriteButton.addTarget(self, action: #selector(toggleFavourite), for: .touchUpInside)
     }
     
     // MARK: - Favourite button action

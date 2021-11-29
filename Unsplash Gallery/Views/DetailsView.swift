@@ -16,7 +16,6 @@ class DetailsView: UIView {
     var photoView = UIImageView()
     var favouriteButton = UIButton()
     var favouriteView = UIImageView()
-    let dateFormatter = DateFormatter()
 
     var image: UIImage? {
         didSet{
@@ -35,16 +34,17 @@ class DetailsView: UIView {
     }
     
     private func setUpViews() {
-        backgroundColor = .systemBackground
-        
+        setUpView()
         setUpLabels()
         setUpPhotoView()
         setUpFavouriteButton()
         setUpFavouriteView()
-        setUpDateFormatter()
         setUpAuthorNameLabel()
-        
         setUpConstraints()
+    }
+    
+    private func setUpView(){
+        backgroundColor = .systemBackground
     }
     
     private func setUpLabels(){
@@ -74,10 +74,6 @@ class DetailsView: UIView {
         favouriteView.clipsToBounds = true
         favouriteView.tintColor = .red
         favouriteButton.addSubview(favouriteView)
-    }
-    
-    private func setUpDateFormatter(){
-        dateFormatter.dateFormat = "dd.MM.yyyy"
     }
     
     private func setUpAuthorNameLabel() {

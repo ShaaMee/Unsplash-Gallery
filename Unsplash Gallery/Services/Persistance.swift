@@ -8,12 +8,12 @@
 import Foundation
 
 class Persistance {
-    
     static let shared = Persistance()
-    
     private let persistanceKey = "FavouritesList"
-    
     private let storage = UserDefaults.standard
+    
+    private init(){}
+
     
     // MARK: - Adding Codable object to UserDefaults
     
